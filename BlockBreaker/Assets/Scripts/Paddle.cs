@@ -10,7 +10,7 @@ namespace BrickBreaker
         [SerializeField]
         private float moveSpeed = 2f;
         private float paddleSize = 0.7f;
-        private Ball ball;
+        private Transform ball;
         private float currentTime = 0f;
 
         [SerializeField]
@@ -21,7 +21,7 @@ namespace BrickBreaker
         // Use this for initialization
         void Start()
         {
-            ball = FindObjectOfType<Ball>();
+            ball = FindObjectOfType<BallBouncer2D>().transform;
         }
 
         // Update is called once per frame
@@ -45,7 +45,7 @@ namespace BrickBreaker
         {
 
             Vector3 paddlePos = new Vector3(0.5f, transform.position.y, 0f);
-            paddlePos.x = Mathf.Clamp(ball.transform.position.x, 0.5f, 15.5f);
+            paddlePos.x = Mathf.Clamp(ball.position.x, 0.5f, 15.5f);
 
             transform.position = paddlePos;
         }
