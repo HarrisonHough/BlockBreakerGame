@@ -15,8 +15,8 @@ public class PlaySpace : MonoBehaviour {
 
     [SerializeField]
     private float wallWidth = 1f;
-    [SerializeField]
-    private bool adjustSprite = false;
+    //[SerializeField]
+    //private bool adjustSprite = false;
     public static float xMin;
     public static float xMax;
     public static float yMin;

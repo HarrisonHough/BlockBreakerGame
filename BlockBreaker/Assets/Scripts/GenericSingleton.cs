@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace BrickBreaker
+namespace Blockbreaker
 {
     /// <summary>
     /// 
@@ -14,6 +14,9 @@ namespace BrickBreaker
 
         private static T instance;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static T Instance
         {
             get
@@ -32,12 +35,14 @@ namespace BrickBreaker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual void Awake()
         {
             if (instance == null)
             {
                 instance = this as T;
-                DontDestroyOnLoad(this.gameObject);
             }
             else
             {
