@@ -8,25 +8,25 @@ namespace Blockbreaker
     public class Ball : MonoBehaviour
     {
         [SerializeField]
-        private float constantSpeed = 10f;
+        private float _constantSpeed = 10f;
 
-        private Vector3 lastFrameVelocity;
-        private Rigidbody2D rb;
+        private Vector3 _lastFrameVelocity;
+        private Rigidbody2D _rigidbody2D;
 
-        private Player player;
-        private Vector3 playerOffset;
+        private Player _player;
+        private Vector3 _playerOffset;
 
-        private bool active = false;
+        private bool _active = false;
 
         /// <summary>
         /// 
         /// </summary>
         private void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
 
-            player = FindObjectOfType<Player>();
-            playerOffset = transform.position - player.transform.position;
+            _player = FindObjectOfType<Player>();
+            _playerOffset = transform.position - _player.transform.position;
             ResetBall();
         }
 
@@ -36,8 +36,8 @@ namespace Blockbreaker
         public void StartBallMovement()
         {
             transform.parent = null;
-            rb.velocity = new Vector3(constantSpeed, constantSpeed, 0);
-            active = true;
+            _rigidbody2D.velocity = new Vector3(_constantSpeed, _constantSpeed, 0);
+            _active = true;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Blockbreaker
         /// </summary>
         private void Update()
         {
-            lastFrameVelocity = rb.velocity;
+            _lastFrameVelocity = _rigidbody2D.velocity;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Blockbreaker
         /// <param name="collision"></param>
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (!active)
+            if (!_active)
                 return;
 
             
@@ -80,13 +80,13 @@ namespace Blockbreaker
         private void Bounce(Vector3 collisionNormal)
         {
             
-            var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
+            var direction = Vector3.Reflect(_lastFrameVelocity.normalized, collisionNormal);
 
 
             //Debug.Log("Out Direction: " + direction);
             Vector3 velocity = Vector3.zero;
-            velocity.x = constantSpeed;
-            velocity.y = constantSpeed;
+            velocity.x = _constantSpeed;
+            velocity.y = _constantSpeed;
             if (direction.x < 0)
             {
                 velocity.x *= -1;
@@ -95,7 +95,7 @@ namespace Blockbreaker
             {
                 velocity.y *= -1;
             }
-            rb.velocity = velocity;
+            _rigidbody2D.velocity = velocity;
             //rb.velocity = direction * Mathf.Max(speed, minVelocity);
         }
 
@@ -104,10 +104,10 @@ namespace Blockbreaker
         /// </summary>
         public void ResetBall()
         {
-            active = false;
-            rb.velocity = Vector3.zero;
-            transform.position = player.transform.position + playerOffset;
-            transform.parent = player.transform;
+            _active = false;
+            _rigidbody2D.velocity = Vector3.zero;
+            transform.position = _player.transform.position + _playerOffset;
+            transform.parent = _player.transform;
         }
     }
 

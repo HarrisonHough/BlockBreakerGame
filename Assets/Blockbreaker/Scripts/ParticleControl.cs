@@ -5,11 +5,11 @@ using UnityEngine;
 public class ParticleControl : MonoBehaviour {
 
     [SerializeField]
-    private GameObject smokePrefab;
-    private ParticleSystem[] smokePool;
+    private GameObject _smokePrefab;
+    private ParticleSystem[] _smokePool;
     [SerializeField]
-    private int poolSize = 5;
-    private int poolIndex = 0;
+    private int _poolSize = 5;
+    private int _poolIndex = 0;
 	// Use this for initialization
 	void Start () {
         CreateSmokeParticlePool();
@@ -17,27 +17,27 @@ public class ParticleControl : MonoBehaviour {
 
     void CreateSmokeParticlePool()
     {
-        smokePool = new ParticleSystem[poolSize];
-        for (int i = 0; i < smokePool.Length; i++)
+        _smokePool = new ParticleSystem[_poolSize];
+        for (int i = 0; i < _smokePool.Length; i++)
         {
             //create smoke particle object
-            GameObject smokeObject = Instantiate(smokePrefab,Vector3.zero, Quaternion.identity);
+            GameObject smokeObject = Instantiate(_smokePrefab,Vector3.zero, Quaternion.identity);
             //parent under this object
             smokeObject.transform.parent = transform;
             //assign in array
-            smokePool[i] = smokeObject.GetComponent<ParticleSystem>();
+            _smokePool[i] = smokeObject.GetComponent<ParticleSystem>();
         }
     }
 
     public void SpawnSmokeParticles(Vector3 position)
     {
-        smokePool[poolIndex].transform.position = position;
-        smokePool[poolIndex].Play();
+        _smokePool[_poolIndex].transform.position = position;
+        _smokePool[_poolIndex].Play();
 
-        poolIndex++;
-        if (poolIndex >= smokePool.Length)
+        _poolIndex++;
+        if (_poolIndex >= _smokePool.Length)
         {
-            poolIndex = 0;
+            _poolIndex = 0;
         }
     }
 }

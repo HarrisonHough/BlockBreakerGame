@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class UIDebugControl : MonoBehaviour {
 
-    public static UIDebugControl instance;
+    public static UIDebugControl Instance;
 
     [SerializeField]
-    private Text debugText;
+    private Text _debugText;
 	// Use this for initialization
 	void Awake () {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(this);
             return;
         }
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
 	}
 
@@ -29,6 +29,6 @@ public class UIDebugControl : MonoBehaviour {
 
     public void AddDebugText(string textToAdd)
     {
-        debugText.text += "\n" + textToAdd;
+        _debugText.text += "\n" + textToAdd;
     }
 }

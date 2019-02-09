@@ -10,27 +10,27 @@ namespace Blockbreaker
     public class Brick : MonoBehaviour
     {
 
-        public static int breakableCount = 0;
-        public GameObject smoke;
+        public static int BreakableCount = 0;
+        public GameObject Smoke;
 
         [SerializeField]
-        private Sprite[] hitSprites;
-        private int timesHit;
+        private Sprite[] _hitSprites;
+        private int _timesHit;
 
         [SerializeField]
-        private int pointsForBreaking = 5;
+        private int _pointsForBreaking = 5;
 
-        private SpriteRenderer spriteRenderer;
-        private bool isBreakable ;
+        private SpriteRenderer _spriteRenderer;
+        private bool _isBreakable ;
 
         /// <summary>
         /// Use this for initialization
         /// </summary>
         void Start()
         {
-            isBreakable = (this.tag == "Breakable");
-            timesHit = 0;
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            _isBreakable = (this.tag == "Breakable");
+            _timesHit = 0;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Blockbreaker
         private void OnCollisionEnter2D(Collision2D collision)
         {
             
-            if (isBreakable)
+            if (_isBreakable)
             {
                 HandleHits();
             }
@@ -50,12 +50,12 @@ namespace Blockbreaker
         /// 
         /// </summary>
         private void HandleHits() {
-            timesHit++;
-            int maxHits = hitSprites.Length + 1;
-            if (timesHit >= maxHits)
+            _timesHit++;
+            int maxHits = _hitSprites.Length + 1;
+            if (_timesHit >= maxHits)
             {
                 //add score value
-                GameManager.Instance.AddToScore(pointsForBreaking);
+                GameManager.Instance.AddToScore(_pointsForBreaking);
 
                 //kill block
                 KillBlock();
@@ -71,8 +71,8 @@ namespace Blockbreaker
         /// 
         /// </summary>
         private void LoadSprites() {
-            int index = timesHit - 1;
-            spriteRenderer.sprite = hitSprites[index];
+            int index = _timesHit - 1;
+            _spriteRenderer.sprite = _hitSprites[index];
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Blockbreaker
             GetComponent<SpriteRenderer>().enabled = false;
 
             //Debug.Log("Count before subtraction" + breakableCount);
-            breakableCount--;
+            BreakableCount--;
             //Debug.Log(breakableCount);
             
             GameManager.Instance.BrickDestroyed();

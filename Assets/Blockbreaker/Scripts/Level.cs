@@ -10,8 +10,7 @@ namespace Blockbreaker
     public class Level : MonoBehaviour
     {
 
-        private int numberOfBricks;
-        public int NumberOfBricks { get { return numberOfBricks; } }
+        public int NumberOfBricks { get; set; }
 
         /// <summary>
         /// Use this for initialization
@@ -19,9 +18,9 @@ namespace Blockbreaker
         /// </summary>
         void Start()
         {
-            if (numberOfBricks == 0)
+            if (NumberOfBricks == 0)
             {
-                numberOfBricks = transform.childCount;
+                NumberOfBricks = transform.childCount;
             }            
         }
 
@@ -30,12 +29,12 @@ namespace Blockbreaker
         /// </summary>
         private void OnEnable()
         {
-            if (numberOfBricks == 0)
+            if (NumberOfBricks == 0)
             {
-                numberOfBricks = transform.childCount;
+                NumberOfBricks = transform.childCount;
             }
-            Debug.Log("Bricks to break = " + numberOfBricks);
-            Brick.breakableCount = numberOfBricks;
+            Debug.Log("Bricks to break = " + NumberOfBricks);
+            Brick.BreakableCount = NumberOfBricks;
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Blockbreaker
         /// </summary>
         private void Reset()
         {
-            numberOfBricks = transform.childCount;
+            NumberOfBricks = transform.childCount;
         }
 
     }

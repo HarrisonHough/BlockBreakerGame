@@ -11,9 +11,9 @@ namespace Blockbreaker
     {
         
         [SerializeField]
-        private AudioSource musicAudio;
+        private AudioSource _musicAudio;
         [SerializeField]
-        private AudioSource sfxAudio;
+        private AudioSource _sfxAudio;
 
         /// <summary>
         /// Use this for initialization
@@ -21,13 +21,13 @@ namespace Blockbreaker
         void Start()
         {
             
-            if (musicAudio == null)
+            if (_musicAudio == null)
             {
-                musicAudio = transform.GetChild(0).GetComponent<AudioSource>();
+                _musicAudio = transform.GetChild(0).GetComponent<AudioSource>();
             }
-            if (sfxAudio == null)
+            if (_sfxAudio == null)
             {
-                sfxAudio = transform.GetChild(1).GetComponent<AudioSource>();
+                _sfxAudio = transform.GetChild(1).GetComponent<AudioSource>();
             }
 
             PlayMusic();
@@ -38,7 +38,7 @@ namespace Blockbreaker
         /// </summary>
         void PlayMusic()
         {
-            musicAudio.Play();
+            _musicAudio.Play();
         }
 
     }

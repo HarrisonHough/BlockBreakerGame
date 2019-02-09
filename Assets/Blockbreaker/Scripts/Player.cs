@@ -6,7 +6,7 @@ namespace Blockbreaker
 {
     public class Player : MonoBehaviour, IMovable<Vector2>
     {
-        public bool autoPlay;
+        public bool AutoPlayActive;
         [SerializeField]
         private float moveSpeed = 2f;
         private float paddleSize = 0.7f;
@@ -32,7 +32,7 @@ namespace Blockbreaker
         void Update()
         {
 
-            if (autoPlay)
+            if (AutoPlayActive)
             {
                 AutoPlay();
             }            
@@ -44,7 +44,7 @@ namespace Blockbreaker
         /// </summary>
         public void ToggleAutoPlay()
         {
-            autoPlay = !autoPlay;
+            AutoPlayActive = !AutoPlayActive;
 
         }
 

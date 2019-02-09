@@ -23,12 +23,12 @@ public class ScreenOrientation : MonoBehaviour {
         {
             case Orientation.Portrait:
                 Screen.orientation = UnityEngine.ScreenOrientation.Portrait;
-                if(UIDebugControl.instance != null)
-                    UIDebugControl.instance.AddDebugText("Setting to portrait mode");
+                if(UIDebugControl.Instance != null)
+                    UIDebugControl.Instance.AddDebugText("Setting to portrait mode");
                 if (Screen.width > Screen.height)
                 {
-                    if (UIDebugControl.instance != null)
-                        UIDebugControl.instance.AddDebugText("Setting portrait resolution");
+                    if (UIDebugControl.Instance != null)
+                        UIDebugControl.Instance.AddDebugText("Setting portrait resolution");
                     SetResolution();
                 }
                 break;

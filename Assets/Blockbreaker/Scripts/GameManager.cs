@@ -11,27 +11,27 @@ namespace Blockbreaker
     public class GameManager : GenericSingleton<GameManager>
     {
         [SerializeField]
-        private LevelManager levelManager;
+        private LevelManager _levelManager;
         [SerializeField]
-        private Ball ball;
-        public Ball Ball { get { return ball; } }
-
-        [SerializeField]
-        private ParticleControl particleControl;
-        public ParticleControl ParticleControl { get { return particleControl; } }
+        private Ball _ball;
+        public Ball Ball { get { return _ball; } }
 
         [SerializeField]
-        private UIControl uiControl;
-        public UIControl UIControl { get { return uiControl; } }
+        private ParticleControl _particleControl;
+        public ParticleControl ParticleControl { get { return _particleControl; } }
 
-        public bool waitingForInput = true;
+        [SerializeField]
+        private UIControl _uiControl;
+        public UIControl UIControl { get { return _uiControl; } }
 
-        private PlayerInput playerInput;
+        public bool _waitingForInput = true;
 
-        private int score = 0;
-        public int Score { get{ return score; } }
+        private PlayerInput _playerInput;
 
-        private int scoreMultiplier = 0;
+        private int _score = 0;
+        public int Score { get{ return _score; } }
+
+        private int _scoreMultiplier = 0;
 
         //public bool WaitingForInput { get { return waitingForInput; } }
 
@@ -48,25 +48,25 @@ namespace Blockbreaker
         /// </summary>
         void CheckForNullReferences()
         {
-            if (levelManager == null)
+            if (_levelManager == null)
             {
-                levelManager = FindObjectOfType<LevelManager>();
+                _levelManager = FindObjectOfType<LevelManager>();
             }
-            if (ball == null)
+            if (_ball == null)
             {
-                ball = FindObjectOfType<Ball>();
+                _ball = FindObjectOfType<Ball>();
             }
             if (ParticleControl == null)
             {
-                particleControl = FindObjectOfType<ParticleControl>();
+                _particleControl = FindObjectOfType<ParticleControl>();
             }
-            if (uiControl == null)
+            if (_uiControl == null)
             {
-                uiControl = FindObjectOfType<UIControl>();
+                _uiControl = FindObjectOfType<UIControl>();
             }
-            if (playerInput == null)
+            if (_playerInput == null)
             {
-                playerInput = FindObjectOfType<PlayerInput>();
+                _playerInput = FindObjectOfType<PlayerInput>();
             }
         }
 
@@ -75,7 +75,7 @@ namespace Blockbreaker
         /// </summary>
         public void BrickDestroyed()
         {
-            if (Brick.breakableCount <= 0)
+            if (Brick.BreakableCount <= 0)
             {
                 LevelComplete();
             }
@@ -88,12 +88,12 @@ namespace Blockbreaker
         public void AddToScore(int scoreToAdd)
         {
             //TODO add in score multiplier
-            if (scoreMultiplier > 0)
-                score += scoreToAdd * scoreMultiplier;
+            if (_scoreMultiplier > 0)
+                _score += scoreToAdd * _scoreMultiplier;
             else
-                score += scoreToAdd;
+                _score += scoreToAdd;
             //update score
-            uiControl.SetScoreText(score);
+            _uiControl.SetScoreText(_score);
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Blockbreaker
         /// </summary>
         public void IncreaseScoreMultiplier()
         {
-            scoreMultiplier++;
-            uiControl.SetMultiplierText(scoreMultiplier);
+            _scoreMultiplier++;
+            _uiControl.SetMultiplierText(_scoreMultiplier);
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Blockbreaker
         /// </summary>
         public void ResetScoreMultiplier()
         {
-            scoreMultiplier = 0;
-            uiControl.SetMultiplierText(scoreMultiplier);
+            _scoreMultiplier = 0;
+            _uiControl.SetMultiplierText(_scoreMultiplier);
         }
 
         /// <summary>
@@ -121,20 +121,20 @@ namespace Blockbreaker
         public void GameOver(bool win)
         {
             //disable player input
-            playerInput.enabled = false;
-            uiControl.ToggleAutoPlayPanel(false);
+            _playerInput.enabled = false;
+            _uiControl.ToggleAutoPlayPanel(false);
             if (win)
             {
                 //update save score
                 //Do game over lost things
                 
-                uiControl.ToggleWinPanel(true);
+                _uiControl.ToggleWinPanel(true);
                 return;
             }
 
             //update save score
             //Display game over 
-            uiControl.ToggleGameOverPanel(true);
+            _uiControl.ToggleGameOverPanel(true);
             //Do game over lost things
         }
 
@@ -173,13 +173,13 @@ namespace Blockbreaker
         {
 
             // TODO stop ball movement
-            ball.ResetBall();
+            _ball.ResetBall();
             //show wave complete and score
 
             // wait a while then load next level
-            levelManager.LoadNextLevel();
+            _levelManager.LoadNextLevel();
 
-            waitingForInput = true;
+            _waitingForInput = true;
 
             UIControl.ToggleTapToStartPanel(true);
         }

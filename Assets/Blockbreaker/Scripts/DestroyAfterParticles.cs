@@ -10,16 +10,16 @@ namespace BrickBreaker
     public class DestroyAfterParticles : MonoBehaviour
     {
 
-        ParticleSystem particles;
+        private ParticleSystem _particles;
 
         /// <summary>
         /// Use this for initialization
         /// </summary>
         void Start()
         {
-            particles = GetComponent<ParticleSystem>();
+            _particles = GetComponent<ParticleSystem>();
 
-            Invoke("DestroySelf", particles.main.duration + 1f);
+            Invoke("DestroySelf", _particles.main.duration + 1f);
         }
 
         /// <summary>
